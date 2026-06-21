@@ -1,0 +1,14 @@
+{
+  "name": "simple-captive-portal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal captive portal server with grant hook support.",
+  "main": "server.js",
+  "scripts": {
+    "generate:config": "node scripts/generate-config.js",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

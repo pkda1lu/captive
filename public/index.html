@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Доступ к интернету</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <main class="portal">
+      <section class="panel" aria-labelledby="title">
+        <div class="brand">
+          <div class="mark" aria-hidden="true">CP</div>
+          <div>
+            <p class="eyebrow">Гостевая сеть</p>
+            <h1 id="title">Доступ к интернету</h1>
+          </div>
+        </div>
+
+        <p class="lead">
+          Подтвердите подключение, чтобы продолжить работу в сети.
+        </p>
+
+        <form id="access-form" class="form">
+          <label>
+            Имя или номер комнаты
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              maxlength="80"
+              placeholder="Например: Иван, офис 204"
+            />
+          </label>
+
+          <label class="check">
+            <input id="terms" name="terms" type="checkbox" required />
+            <span>Я принимаю правила использования сети</span>
+          </label>
+
+          <button id="submit" type="submit">Получить доступ</button>
+          <p id="message" class="message" role="status"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>
