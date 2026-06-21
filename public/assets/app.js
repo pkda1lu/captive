@@ -3,7 +3,7 @@ const submit = document.querySelector("#submit");
 const message = document.querySelector("#message");
 const params = new URLSearchParams(window.location.search);
 const loginUrl = params.get("loginurl");
-const userUrl = params.get("userurl") || "http://example.com/";
+const userUrl = params.get("userurl") || "https://captiveportal.mytunnel.org/";
 
 function setMessage(text, isError = false) {
   message.textContent = text;

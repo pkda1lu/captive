@@ -1,7 +1,7 @@
 const crypto = require("node:crypto");
 
-const portalHost = process.argv[2] || "portal.example.com";
-const vpsIp = process.argv[3] || "YOUR_VPS_PUBLIC_IP";
+const portalHost = process.argv[2] || "captiveportal.mytunnel.org";
+const vpsIp = process.argv[3] || "159.194.215.125";
 const nasId = process.argv[4] || "router-01";
 const uamSecret = crypto.randomBytes(24).toString("base64url");
 const radiusSecret = crypto.randomBytes(24).toString("base64url");
