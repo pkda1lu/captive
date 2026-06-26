@@ -5,7 +5,7 @@
 В примерах используются:
 
 - Домен портала: `captiveozon.online`
-- IP VPS: `203.0.113.10`
+- IP VPS: `159.194.215.125`
 - Папка проекта на VPS: `/opt/captive`
 - Пользователь сервиса: `captive`
 - NAS ID роутера: `router-01`
@@ -17,7 +17,7 @@
 У регистратора или в DNS-панели создайте A-запись:
 
 ```text
-captiveozon.online -> 203.0.113.10
+captiveozon.online -> 159.194.215.125
 ```
 
 Проверьте с локальной машины:
@@ -33,7 +33,7 @@ nslookup captiveozon.online
 Зайдите на VPS:
 
 ```bash
-ssh root@203.0.113.10
+ssh root@159.194.215.125
 ```
 
 Обновите систему и поставьте пакеты:
@@ -109,8 +109,8 @@ chown -R captive:captive /opt/captive
 Или через `scp` с вашей машины:
 
 ```bash
-scp -r C:/Users/anotr/Documents/captive root@203.0.113.10:/opt/captive
-ssh root@203.0.113.10
+scp -r C:/Users/anotr/Documents/captive root@159.194.215.125:/opt/captive
+ssh root@159.194.215.125
 chown -R captive:captive /opt/captive
 ```
 
@@ -122,7 +122,7 @@ chown -R captive:captive /opt/captive
 
 ```bash
 cd /opt/captive
-npm run generate:config -- captiveozon.online 203.0.113.10 router-01
+npm run generate:config -- captiveozon.online 159.194.215.125 router-01
 ```
 
 Сохраните вывод. Из него нужны:
@@ -295,7 +295,7 @@ systemctl start freeradius
 ```text
 UAM Server: https://captiveozon.online/
 UAM Secret: PASTE_GENERATED_UAM_SECRET
-RADIUS-сервер 1: 203.0.113.10
+RADIUS-сервер 1: 159.194.215.125
 RADIUS-сервер 2: пусто
 RADIUS Secret: PASTE_GENERATED_RADIUS_SECRET
 RADIUS NAS ID: router-01
@@ -309,7 +309,7 @@ DNS 2: 8.8.8.8
 
 ```text
 captiveozon.online
-203.0.113.10
+159.194.215.125
 ```
 
 Иначе клиент может не открыть портал до авторизации.
@@ -350,3 +350,53 @@ RADIUS не отвечает:
 - Проверьте, какой URL и параметры роутер передает порталу.
 - Некоторые роутеры требуют CHAP/MD5 UAM flow, а не простой `username/password`.
 - Пришлите модель роутера и redirect URL, тогда форму можно адаптировать точно.
+
+## 13. Смена домена портала на VPS
+
+Если нужно сменить домен (например, на `captiveozon.online`), выполните на VPS по порядку.
+
+1. DNS: создайте A-запись нового домена на IP VPS и дождитесь распространения.
+
+```bash
+nslookup captiveozon.online
+# должно вернуть 159.194.215.125
+```
+
+2. Обновите `.env` портала:
+
+```bash
+nano /opt/captive/.env
+# PORTAL_HOST=captiveozon.online
+systemctl restart captive-portal
+```
+
+3. Обновите домен для Caddy (HTTPS-сертификат выпустится автоматически под новый домен):
+
+```bash
+printf 'PORTAL_HOST=captiveozon.online\n' > /etc/caddy/env
+systemctl restart caddy
+systemctl status caddy
+```
+
+4. Перегенерируйте конфиг роутера под новый домен и IP:
+
+```bash
+cd /opt/captive
+npm run generate:config -- captiveozon.online 159.194.215.125 router-01
+```
+
+5. На роутере (UAM/Walled Garden) пропишите новый домен:
+
+```text
+UAM Server: https://captiveozon.online/
+Allowed Hosts / Walled Garden: captiveozon.online, 159.194.215.125
+```
+
+6. Проверка:
+
+```bash
+curl -I https://captiveozon.online/        # ожидаем HTTP 200
+journalctl -u caddy -f                      # смотрим выпуск сертификата
+```
+
+Старый домен можно удалить из DNS и из Walled Garden роутера после успешной проверки.

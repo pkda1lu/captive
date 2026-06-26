@@ -22,13 +22,13 @@ npm start
 ## Сгенерировать данные для роутера
 
 ```powershell
-npm run generate:config -- captiveozon.online 203.0.113.10 router-01
+npm run generate:config -- captiveozon.online 159.194.215.125 router-01
 ```
 
 Где:
 
 - `captiveozon.online` - домен портала на VPS.
-- `203.0.113.10` - публичный IP VPS.
+- `159.194.215.125` - публичный IP VPS.
 - `router-01` - NAS ID для этого роутера.
 
 Команда выведет значения для полей роутера и `.env`.
