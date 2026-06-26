@@ -1,0 +1,29 @@
+Router fields
+-------------
+UAM Server: https://captiveozon.online/
+UAM Secret: O9dx53eK3d6Vd_r0RpPJHyCaMQS07HYs
+RADIUS-server 1: 159.194.215.125
+RADIUS-server 2: leave empty
+RADIUS Secret: tRVMS6BcBqoQg1ssK-XKG6klGDsjsd5G
+RADIUS NAS ID: router-01
+RADIUS location name: Main location
+RADIUS location ID: main-01
+DNS 1: 1.1.1.1
+DNS 2: 8.8.8.8
+
+VPS .env
+--------
+PORT=8080
+DEFAULT_USERNAME=guest
+DEFAULT_PASSWORD=guest
+UAM_SECRET=O9dx53eK3d6Vd_r0RpPJHyCaMQS07HYs
+RADIUS_SECRET=tRVMS6BcBqoQg1ssK-XKG6klGDsjsd5G
+PORTAL_HOST=captiveozon.online
+
+FreeRADIUS client block
+-----------------------
+client router_01 {
+  ipaddr = ROUTER_PUBLIC_WAN_IP
+  secret = tRVMS6BcBqoQg1ssK-XKG6klGDsjsd5G
+  nas_type = other
+}

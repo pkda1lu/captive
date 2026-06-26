@@ -7,7 +7,8 @@ const uamport = params.get("uamport");
 const loginUrl = params.get("loginurl");
 
 // Куда отправить клиента после успешной авторизации — наш экран «Готово».
-const SUCCESS_URL = "https://captiveozon.online/?connected=1";
+// Берём адрес, с которого открыт портал (локальный IP или домен) — работает везде.
+const SUCCESS_URL = `${window.location.origin}/?connected=1`;
 
 const screenConnect = document.querySelector("#screen-connect");
 const screenConnected = document.querySelector("#screen-connected");

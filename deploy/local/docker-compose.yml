@@ -1,0 +1,31 @@
+# Локальный стек для запуска в сети ПВЗ (Windows + Docker Desktop).
+# Портал отдаётся по http на порту 80, FreeRADIUS — на 1812/1813 UDP.
+# Запуск:  docker compose -f deploy/local/docker-compose.yml up -d
+services:
+  portal:
+    image: node:22-alpine
+    working_dir: /app
+    command: node server.js
+    restart: unless-stopped
+    environment:
+      PORT: "8080"
+      HOST: "0.0.0.0"
+      DEFAULT_USERNAME: guest
+      DEFAULT_PASSWORD: guest
+      ACCESS_TTL_MINUTES: "480"
+      UAM_SECRET: ${UAM_SECRET}
+    volumes:
+      - ../..:/app
+    ports:
+      - "80:8080"
+
+  freeradius:
+    image: freeradius/freeradius-server:latest
+    restart: unless-stopped
+    command: ["freeradius", "-f"]
+    volumes:
+      - ./clients.conf:/etc/raddb/clients.conf:ro
+      - ../freeradius/authorize:/etc/raddb/mods-config/files/authorize:ro
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
