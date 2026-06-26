@@ -22,12 +22,12 @@ npm start
 ## Сгенерировать данные для роутера
 
 ```powershell
-npm run generate:config -- captiveportal.mytunnel.org 203.0.113.10 router-01
+npm run generate:config -- captiveozon.online 203.0.113.10 router-01
 ```
 
 Где:
 
-- `captiveportal.mytunnel.org` - домен портала на VPS.
+- `captiveozon.online` - домен портала на VPS.
 - `203.0.113.10` - публичный IP VPS.
 - `router-01` - NAS ID для этого роутера.
 
@@ -38,7 +38,7 @@ npm run generate:config -- captiveportal.mytunnel.org 203.0.113.10 router-01
 Для формы со скриншота:
 
 ```text
-UAM Server: https://captiveportal.mytunnel.org/
+UAM Server: https://captiveozon.online/
 UAM Secret: значение из npm run generate:config
 RADIUS-сервер 1: публичный IP VPS
 RADIUS-сервер 2: пусто

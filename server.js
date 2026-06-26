@@ -181,7 +181,7 @@ async function grantAccess(req, res) {
     ok: true,
     ip,
     expiresAt: entry.expiresAt,
-    redirectTo: data.redirectTo || "https://captiveportal.mytunnel.org/"
+    redirectTo: data.redirectTo || "https://captiveozon.online/"
   });
 }
 

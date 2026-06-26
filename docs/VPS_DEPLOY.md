@@ -4,7 +4,7 @@
 
 В примерах используются:
 
-- Домен портала: `captiveportal.mytunnel.org`
+- Домен портала: `captiveozon.online`
 - IP VPS: `203.0.113.10`
 - Папка проекта на VPS: `/opt/captive`
 - Пользователь сервиса: `captive`
@@ -17,13 +17,13 @@
 У регистратора или в DNS-панели создайте A-запись:
 
 ```text
-captiveportal.mytunnel.org -> 203.0.113.10
+captiveozon.online -> 203.0.113.10
 ```
 
 Проверьте с локальной машины:
 
 ```bash
-nslookup captiveportal.mytunnel.org
+nslookup captiveozon.online
 ```
 
 Должен вернуться IP вашего VPS.
@@ -122,7 +122,7 @@ chown -R captive:captive /opt/captive
 
 ```bash
 cd /opt/captive
-npm run generate:config -- captiveportal.mytunnel.org 203.0.113.10 router-01
+npm run generate:config -- captiveozon.online 203.0.113.10 router-01
 ```
 
 Сохраните вывод. Из него нужны:
@@ -148,7 +148,7 @@ HOST=127.0.0.1
 ACCESS_TTL_MINUTES=480
 DEFAULT_USERNAME=guest
 DEFAULT_PASSWORD=guest
-PORTAL_HOST=captiveportal.mytunnel.org
+PORTAL_HOST=captiveozon.online
 UAM_SECRET=PASTE_GENERATED_UAM_SECRET
 RADIUS_SECRET=PASTE_GENERATED_RADIUS_SECRET
 ```
@@ -192,7 +192,7 @@ curl -s http://127.0.0.1:8080/api/uam
 
 ```bash
 mkdir -p /etc/caddy
-printf 'PORTAL_HOST=captiveportal.mytunnel.org\n' > /etc/caddy/env
+printf 'PORTAL_HOST=captiveozon.online\n' > /etc/caddy/env
 ```
 
 Подключите env в systemd override:
@@ -220,7 +220,7 @@ systemctl status caddy
 Проверка с любой машины:
 
 ```bash
-curl -I https://captiveportal.mytunnel.org/
+curl -I https://captiveozon.online/
 ```
 
 Должен быть HTTP `200`.
@@ -293,7 +293,7 @@ systemctl start freeradius
 В поля captive portal на роутере:
 
 ```text
-UAM Server: https://captiveportal.mytunnel.org/
+UAM Server: https://captiveozon.online/
 UAM Secret: PASTE_GENERATED_UAM_SECRET
 RADIUS-сервер 1: 203.0.113.10
 RADIUS-сервер 2: пусто
@@ -308,7 +308,7 @@ DNS 2: 8.8.8.8
 Если есть поля `UAM Allowed`, `Walled Garden`, `Allowed Hosts` или похожие, добавьте:
 
 ```text
-captiveportal.mytunnel.org
+captiveozon.online
 203.0.113.10
 ```
 
@@ -318,7 +318,7 @@ captiveportal.mytunnel.org
 
 1. Подключитесь телефоном/ноутбуком к гостевой Wi-Fi.
 2. Откройте `http://neverssl.com/`.
-3. Роутер должен перенаправить на `https://captiveportal.mytunnel.org/`.
+3. Роутер должен перенаправить на `https://captiveozon.online/`.
 4. Нажмите кнопку доступа.
 5. Роутер должен получить `Access-Accept` от RADIUS и открыть интернет.
 
@@ -336,7 +336,7 @@ journalctl -u freeradius -f
 
 - Добавьте домен/IP портала в `UAM Allowed` или `Walled Garden`.
 - Проверьте DNS в роутере.
-- Проверьте, что `https://captiveportal.mytunnel.org/` доступен извне.
+- Проверьте, что `https://captiveozon.online/` доступен извне.
 
 RADIUS не отвечает:
 
