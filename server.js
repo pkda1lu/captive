@@ -11,6 +11,7 @@ const DATA_FILE = process.env.DATA_FILE || path.join(__dirname, "data", "access.
 const GRANT_COMMAND = process.env.GRANT_COMMAND || "";
 const DEFAULT_USERNAME = process.env.DEFAULT_USERNAME || "guest";
 const DEFAULT_PASSWORD = process.env.DEFAULT_PASSWORD || "guest";
+const UAM_SECRET = process.env.UAM_SECRET || "";
 
 const PUBLIC_DIR = path.join(__dirname, "public");
 const MIME_TYPES = {
@@ -185,6 +186,20 @@ async function grantAccess(req, res) {
   });
 }
 
+// CoovaChilli/Chillispot UAM challenge-response.
+// response = MD5( 0x00 + password + newchal ),
+// where newchal = MD5(challenge_bytes + uamsecret) if uamsecret set, else challenge_bytes.
+function uamResponse(hexChallenge, password) {
+  const challenge = Buffer.from(String(hexChallenge || ""), "hex");
+  const newchal = UAM_SECRET
+    ? crypto.createHash("md5").update(Buffer.concat([challenge, Buffer.from(UAM_SECRET)])).digest()
+    : challenge;
+  return crypto
+    .createHash("md5")
+    .update(Buffer.concat([Buffer.from([0]), Buffer.from(password), newchal]))
+    .digest("hex");
+}
+
 function handleProbe(req, res, ip, pathname) {
   const isProbe =
     pathname === "/generate_204" ||
@@ -219,7 +234,20 @@ async function handleRequest(req, res) {
   const url = new URL(req.url, `http://${req.headers.host || "localhost"}`);
   const ip = getClientIp(req);
 
+  if (url.pathname === "/" && url.search) {
+    console.log(`portal hit ${ip}: ${url.search}`);
+  }
+
   if (handleProbe(req, res, ip, url.pathname)) return;
+
+  if (req.method === "GET" && url.pathname === "/api/uam-login") {
+    const challenge = url.searchParams.get("challenge") || "";
+    sendJson(res, 200, {
+      username: DEFAULT_USERNAME,
+      response: uamResponse(challenge, DEFAULT_PASSWORD)
+    });
+    return;
+  }
 
   if (req.method === "GET" && url.pathname === "/api/status") {
     sendJson(res, 200, {
