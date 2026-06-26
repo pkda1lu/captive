@@ -3,44 +3,92 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Доступ к интернету</title>
+    <title>OZON · Wi-Fi для гостей</title>
     <link rel="stylesheet" href="/assets/styles.css" />
   </head>
   <body>
-    <main class="portal">
-      <section class="panel" aria-labelledby="title">
-        <div class="brand">
-          <div class="mark" aria-hidden="true">CP</div>
-          <div>
-            <p class="eyebrow">Гостевая сеть</p>
-            <h1 id="title">Доступ к интернету</h1>
-          </div>
+    <main class="page">
+      <!-- ЭКРАН ПОДКЛЮЧЕНИЯ -->
+      <section id="screen-connect" class="card">
+        <header class="brand">
+          <img class="logo" src="/assets/ozon-logo.png" alt="OZON" />
+          <span class="brand-sub">Пункт выдачи заказов</span>
+        </header>
+
+        <div class="hero">
+          <img src="/assets/pvz-hero.png" alt="Пункт выдачи OZON" />
         </div>
 
-        <p class="lead">
-          Подтвердите подключение, чтобы продолжить работу в сети.
-        </p>
+        <h1>Бесплатный Wi-Fi для гостей</h1>
+        <p class="lead">Подключитесь к сети, пока ждёте заказ.</p>
+
+        <div class="hours">
+          <span class="dot"></span> Режим работы: <b>9:00–21:00</b>
+        </div>
 
         <form id="access-form" class="form">
-          <label>
-            Имя или номер комнаты
-            <input
-              id="name"
-              name="name"
-              autocomplete="name"
-              maxlength="80"
-              placeholder="Например: Иван, офис 204"
-            />
-          </label>
-
           <label class="check">
             <input id="terms" name="terms" type="checkbox" required />
-            <span>Я принимаю правила использования сети</span>
+            <span>Принимаю правила использования сети</span>
           </label>
-
-          <button id="submit" type="submit">Получить доступ</button>
+          <button id="submit" type="submit">Подключиться к интернету</button>
           <p id="message" class="message" role="status"></p>
         </form>
+
+        <p class="note">После подключения будут доступны чаевые и отзывы 💙</p>
+      </section>
+
+      <!-- ЭКРАН ПОСЛЕ ПОДКЛЮЧЕНИЯ -->
+      <section id="screen-connected" class="card" hidden>
+        <header class="brand">
+          <img class="logo" src="/assets/ozon-logo.png" alt="OZON" />
+          <span class="brand-sub">Пункт выдачи заказов</span>
+        </header>
+
+        <div class="success">
+          <div class="success-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="34" height="34">
+              <path d="M20 6L9 17l-5-5" fill="none" stroke="#fff"
+                stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <h1>Готово, вы в сети!</h1>
+          <p class="lead">Спасибо, что выбрали OZON. Хорошего дня!</p>
+        </div>
+
+        <div class="actions">
+          <a class="action action--tips"
+             href="https://finance.ozon.ru/apps/sbp/ozonbankpay/019f02ff-2130-77d1-ae78-af10ca76ab80"
+             target="_blank" rel="noopener">
+            <span class="action-ico">💙</span>
+            <span class="action-text">
+              <b>Оставить чаевые</b>
+              <small>Поблагодарить сотрудника пункта</small>
+            </span>
+            <span class="action-arrow">→</span>
+          </a>
+
+          <a class="action action--reviews"
+             href="https://yandex.ru/maps/-/CTUAIXYC"
+             target="_blank" rel="noopener">
+            <span class="action-ico">
+              <svg viewBox="0 0 48 60" width="26" height="32" aria-hidden="true">
+                <circle cx="24" cy="22" r="20" fill="#FF3333" />
+                <circle cx="24" cy="22" r="8" fill="#fff" />
+                <path d="M24 39 L31 29 L24 59 Z" fill="#E01010" />
+              </svg>
+            </span>
+            <span class="action-text">
+              <b>Оценить пункт выдачи</b>
+              <small>Отзыв на Яндекс.Картах</small>
+            </span>
+            <span class="action-arrow">→</span>
+          </a>
+        </div>
+
+        <div class="hours">
+          <span class="dot"></span> Режим работы: <b>9:00–21:00</b>
+        </div>
       </section>
     </main>
 
