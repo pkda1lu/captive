@@ -147,6 +147,173 @@ h1 {
   flex: none;
 }
 
+.link {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  width: auto;
+  font: inherit;
+  color: var(--ozon-blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* Модалка */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .modal {
+    align-items: center;
+  }
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 20, 45, 0.5);
+  backdrop-filter: blur(2px);
+  animation: fade 0.2s ease both;
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  max-height: 86dvh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 22px 22px 0 0;
+  box-shadow: var(--shadow);
+  animation: sheet 0.28s ease both;
+}
+
+@media (min-width: 480px) {
+  .modal-card {
+    border-radius: 22px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.modal-close {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  padding: 0;
+}
+
+.modal-close:hover {
+  background: #dbe9ff;
+}
+
+.modal-body {
+  overflow-y: auto;
+  padding: 16px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-body p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.modal-body h3 {
+  margin: 16px 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.modal-body ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.modal-body li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.modal-body li::before {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 15px;
+}
+
+.rules-ok li::before {
+  content: "✅";
+}
+
+.rules-no li::before {
+  content: "⛔";
+}
+
+.rules-info li::before {
+  content: "ℹ️";
+}
+
+.modal-foot {
+  padding: 14px 20px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.modal-foot button {
+  margin: 0;
+}
+
 button {
   appearance: none;
   border: 0;

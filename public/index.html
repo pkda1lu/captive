@@ -29,7 +29,9 @@
         <form id="access-form" class="form">
           <label class="check">
             <input id="terms" name="terms" type="checkbox" required />
-            <span>Принимаю правила использования сети</span>
+            <span>Принимаю
+              <button type="button" id="rules-link" class="link">правила использования сети</button>
+            </span>
           </label>
           <button id="submit" type="submit">Подключиться к интернету</button>
           <p id="message" class="message" role="status"></p>
@@ -90,6 +92,53 @@
           <span class="dot"></span> Режим работы: <b>9:00–21:00</b>
         </div>
       </section>
+
+      <!-- МОДАЛКА С ПРАВИЛАМИ -->
+      <div id="rules-modal" class="modal" hidden>
+        <div class="modal-backdrop" data-close></div>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="rules-title">
+          <div class="modal-head">
+            <h2 id="rules-title">Правила использования сети</h2>
+            <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+          </div>
+
+          <div class="modal-body">
+            <p>Гостевая сеть Wi-Fi предоставляется бесплатно посетителям пункта выдачи
+            заказов OZON для временного доступа в интернет. Подключаясь к сети, вы
+            принимаете настоящие правила.</p>
+
+            <h3>Можно</h3>
+            <ul class="rules-ok">
+              <li>Пользоваться интернетом в личных целях.</li>
+              <li>Проверять статус заказов, почту и мессенджеры.</li>
+              <li>Оставлять чаевые сотруднику и отзывы о пункте выдачи.</li>
+              <li>Просматривать сайты и пользоваться приложениями.</li>
+            </ul>
+
+            <h3>Нельзя</h3>
+            <ul class="rules-no">
+              <li>Нарушать законодательство РФ.</li>
+              <li>Распространять запрещённый, экстремистский или оскорбительный контент.</li>
+              <li>Рассылать спам, вредоносные программы и вирусы.</li>
+              <li>Сканировать, взламывать сеть или получать несанкционированный доступ к оборудованию.</li>
+              <li>Скачивать большие объёмы данных (торренты), чрезмерно нагружать сеть.</li>
+              <li>Использовать сеть для майнинга и коммерческой деятельности.</li>
+            </ul>
+
+            <h3>Важно знать</h3>
+            <ul class="rules-info">
+              <li>Скорость и доступность сети не гарантируются, возможны ограничения и фильтрация трафика.</li>
+              <li>Сеанс ограничен по времени и может быть завершён автоматически.</li>
+              <li>Администрация не несёт ответственности за сохранность ваших данных и безопасность соединения — не передавайте конфиденциальную информацию.</li>
+              <li>При нарушении правил доступ к сети может быть ограничен или прекращён.</li>
+            </ul>
+          </div>
+
+          <div class="modal-foot">
+            <button type="button" id="rules-accept">Принять и закрыть</button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="/assets/app.js"></script>

@@ -40,6 +40,38 @@ if (params.get("connected") !== null) {
   showConnected();
 }
 
+// Модалка с правилами использования сети.
+const rulesModal = document.querySelector("#rules-modal");
+const rulesLink = document.querySelector("#rules-link");
+const rulesAccept = document.querySelector("#rules-accept");
+const terms = document.querySelector("#terms");
+
+function openRules() {
+  rulesModal.hidden = false;
+}
+
+function closeRules() {
+  rulesModal.hidden = true;
+}
+
+if (rulesLink) {
+  rulesLink.addEventListener("click", openRules);
+}
+if (rulesModal) {
+  rulesModal.querySelectorAll("[data-close]").forEach((el) => {
+    el.addEventListener("click", closeRules);
+  });
+}
+if (rulesAccept) {
+  rulesAccept.addEventListener("click", () => {
+    if (terms) terms.checked = true;
+    closeRules();
+  });
+}
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && rulesModal && !rulesModal.hidden) closeRules();
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   submit.disabled = true;
