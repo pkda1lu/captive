@@ -35,8 +35,11 @@ function logonUrl(username, response) {
   return `${base}?${query}`;
 }
 
-// Если открыли уже после авторизации — показываем экран успеха с ссылками.
-if (params.get("connected") !== null) {
+// Экран подключения показываем ТОЛЬКО когда роутер реально прислал captive-редирект
+// (есть challenge/uamip/uamport или loginurl). Во всех остальных случаях — прямой
+// заход или возврат после авторизации (challenge уже не приходит) — экран «Готово».
+const isCaptiveRedirect = Boolean((challenge && uamip && uamport) || loginUrl);
+if (!isCaptiveRedirect) {
   showConnected();
 }
 
