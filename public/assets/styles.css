@@ -455,6 +455,63 @@ button:disabled {
   font-size: 18px;
 }
 
+/* Чаевые с выбором сотрудника */
+.tips {
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+
+.tips-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.tips-people {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 15px;
+  background: var(--bg);
+  border: 1.5px solid transparent;
+  border-radius: 12px;
+  padding: 12px 10px;
+  transition: border-color 0.2s ease, transform 0.06s ease;
+}
+
+.person:hover {
+  border-color: var(--ozon-blue);
+}
+
+.person:active {
+  transform: scale(0.98);
+}
+
+.person-ava {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ozon-blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 /* Подпись автора */
 .credit {
   font-size: 13px;
